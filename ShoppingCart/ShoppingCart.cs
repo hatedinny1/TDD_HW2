@@ -9,9 +9,11 @@ namespace PotterShoppingCart
     {
         public double actualPaid { get; set; }
 
+        private const int bookPrice = 100;
         public void CalculateActualPaid(Dictionary<string, int> books)
         {
-            throw new NotImplementedException();
+            var booksCount = books.Sum(x => x.Value);
+            this.actualPaid = booksCount * bookPrice;
         }
     }
 }
