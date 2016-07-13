@@ -24,21 +24,28 @@ namespace PotterShoppingCart
         public void CalculateActualPaid(Dictionary<string, int> books)
         {
             var booksCount = books.Sum(x => x.Value);
-            var booksMax = books.Max(x => x.Value);
-
-            var uncheckedBooks = books.ToDictionary(x => x.Key, y => y.Value);
-
-            for (int i = booksMax; i > 0; i--)
+            if (booksCount == 1)
             {
-                var groupOfBooks = uncheckedBooks.Where(x => x.Value > 0).ToDictionary(x => x.Key, y => y.Value);
-                var groupOfBooksCount = groupOfBooks.Count();
+                this.actualPaid = bookPrice;
+            }
+            else
+            {
+                var booksMax = books.Max(x => x.Value);
 
-                var discount = this.discountComparison[groupOfBooksCount];
-                this.actualPaid += bookPrice * groupOfBooksCount * discount;
+                var uncheckedBooks = books.ToDictionary(x => x.Key, y => y.Value);
 
-                foreach (var g in groupOfBooks)
+                for (int i = booksMax; i > 0; i--)
                 {
-                    uncheckedBooks[g.Key]--;
+                    var groupOfBooks = uncheckedBooks.Where(x => x.Value > 0).ToDictionary(x => x.Key, y => y.Value);
+                    var groupOfBooksCount = groupOfBooks.Count();
+
+                    var discount = this.discountComparison[groupOfBooksCount];
+                    this.actualPaid += bookPrice * groupOfBooksCount * discount;
+
+                    foreach (var g in groupOfBooks)
+                    {
+                        uncheckedBooks[g.Key]--;
+                    }
                 }
             }
         }
