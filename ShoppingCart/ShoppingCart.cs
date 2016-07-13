@@ -13,7 +13,16 @@ namespace PotterShoppingCart
         public void CalculateActualPaid(Dictionary<string, int> books)
         {
             var booksCount = books.Sum(x => x.Value);
-            this.actualPaid = booksCount * bookPrice;
+            var shouldPaid = booksCount * bookPrice;
+            if (booksCount == 1)
+            {
+                this.actualPaid = shouldPaid;
+            }
+            else if (booksCount == 2)
+            {
+                this.actualPaid = shouldPaid * 0.95;
+            }
+
         }
     }
 }
