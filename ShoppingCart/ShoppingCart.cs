@@ -22,7 +22,10 @@ namespace PotterShoppingCart
             {
                 this.actualPaid = shouldPaid * 0.95;
             }
-
+            else if (booksCount == 3)
+            {
+                this.actualPaid = shouldPaid * 0.9;
+            }
         }
     }
 }
