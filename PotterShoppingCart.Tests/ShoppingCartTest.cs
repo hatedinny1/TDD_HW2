@@ -125,5 +125,22 @@ namespace PotterShoppingCart.Tests
             var excepted = 460;
             Assert.AreEqual(excepted, cart.actualPaid);
         }
+
+        [TestMethod()]
+        public void Test_PotterOne_1_PotterTwo_2_PotterThree_3_AcualPaid_Should_be_560()
+        {
+            //arrange
+            var books = new Dictionary<string, int> {
+                { "episode 1",1},
+                { "episode 2",2},
+                { "episode 3",3},
+            };
+            var cart = new ShoppingCart();
+            //act
+            cart.CalculateActualPaid(books);
+            //assert
+            var excepted = 560;
+            Assert.AreEqual(excepted, cart.actualPaid);
+        }
     }
 }
